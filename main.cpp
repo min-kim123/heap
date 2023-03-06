@@ -3,12 +3,15 @@
 #include <cstring>
 using namespace std;
 
+void sort(int heap[], int size);
+void printarray(int heap[], int size);
+
 int main() {
     bool cont = true;
     int rawinputs[100];//raw input
     char numinput;
     char input[20];
-    int in = 0;;
+    int in = 0;
     int numofnums;
     int heap[100];
     char file[80];
@@ -57,6 +60,48 @@ int main() {
             for (int i = 0; i < size; ++i) {
                 heap[i] = rawinputs[i];
             }
-        size = 0;
+        sort(heap, size);//sort array
+        //print array 
+        cout << "Array in heap order: ";
+        for (int i = 0; i < size; ++i) {
+            cout << heap[i] << " ";
+        }
+        cout << endl;
+        size = 0;//reset size to 0
+    }
+}
+void printarray(int heap[], int size)
+{
+    cout << "Array in heap order: ";
+    for (int i = 0; i < size; ++i)
+        cout << heap[i] << " ";
+    cout << endl;
+}
+
+
+void sort(int heap[], int size) {
+    int index = (size/2) - 1;
+  
+    for (int i = index; i >= 0; --i) {
+        cout << "for" << endl;
+        bool cont = true;
+        while (cont == true) {
+            cout << "while " << endl;
+            int largest = i;
+            int index_left = 2 * i + 1; //find value of right index
+            int index_right = 2 * i + 2; //find value left index
+            if ((index_left < size) && (heap[index_left] > heap[largest])) {
+                largest = index_left;
+            }
+            if ((index_right < size) && (heap[index_right] > heap[largest])) {
+                largest = index_right;
+            }
+            if (largest == i) {
+                cont = false;
+                break;
+            }
+            swap(heap[i], heap[largest]);
+            printarray(heap, size);
+        }
     }
 }
