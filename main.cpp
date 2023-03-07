@@ -1,3 +1,9 @@
+/*
+Author: Min Kim
+Program Description: This program will ask the user for a file or manual input of a series of numbers. It will sort the numbers into 
+a heap array and remove, print, or print in tree form.
+Date: 3/7/23
+*/
 #include <iostream>
 #include <fstream>
 #include <cstring>
@@ -8,6 +14,7 @@ void printarray(int heap[], int size);
 void printtree(int heap[], int size);
 void remove(int heap[], int& size);
 void removeall(int heap[], int& size);
+void printtree(int heap[], int size);
 
 int main() {
     bool cont = true;
@@ -102,7 +109,6 @@ void printarray(int heap[], int size) {
     cout << endl;
 }
 
-
 void sort(int heap[], int size) {
     int index = (size/2)-1;//starting index
     for (int i = index; i >= 0; --i) {
@@ -147,5 +153,34 @@ void removeall(int heap[], int & size){
 }
 
 void printtree(int heap[], int size) {
+    /*
+    */
 
 }
+//17 15 13 9 6 5 10 4 8 3 1 
+/*
+        10
+
+    13
+
+        5
+
+17
+
+
+
+            1
+        6
+            3
+    15
+            8
+        9
+            4
+17
+        10
+
+    13
+
+        5
+
+*/
