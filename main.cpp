@@ -1,20 +1,19 @@
-/*
-Author: Min Kim
-Program Description: This program will ask the user for a file or manual input of a series of numbers. It will sort the numbers into 
-a heap array and remove, print, or print in tree form.
-Date: 3/7/23
-*/
 #include <iostream>
 #include <fstream>
 #include <cstring>
+#include <math.h>
 using namespace std;
-
+/*
+Author: Min Kim
+Program Description: This program will ask the user for a file or manual input of a series of numbers. It will sort the numbers into 
+a heap array and remove, print array, or print in tree form.
+Date: 3/7/23
+*/
 void sort(int heap[], int size);
 void printarray(int heap[], int size);
-void printtree(int heap[], int size);
 void remove(int heap[], int& size);
 void removeall(int heap[], int& size);
-void printtree(int heap[], int size);
+void printtree(int heap[], int spot, int size);
 
 int main() {
     bool cont = true;
@@ -86,18 +85,19 @@ int main() {
                 printarray(heap, size);//print array again
             }
             else if (in2 == 2) {
-                removeall(heap, size);
+                removeall(heap, size);//remove all
             }
             else if (in2 == 3) {
-
+                printtree(heap, 0, size);//print tree
             }
             else if (in2 == 4) {
-                cont2 = false;
+                cont2 = false;//break 
             }
             else {
                 cout << "Invalid input" << endl;
             }
         }
+        cont2 = true;//reset to true
         size = 0;//reset size to 0
     }
 }
@@ -145,42 +145,23 @@ void remove(int heap[], int& size) {//deletes and resorts
     cout << "Number removed: " << temp << endl;
 }
 
-void removeall(int heap[], int & size){
+void removeall(int heap[], int & size){//remove all, calls the remove function
     while (heap[0] != '\0') {
         remove(heap, size);
     }
     printarray(heap, size);
 }
 
-void printtree(int heap[], int size) {
-    /*
-    */
-
+void printtree(int heap[], int spot, int size) {//print tree
+    if(spot >= size) {
+        return;
+    }
+    printtree(heap, spot*2+1, size);
+    int num = spot+1;
+    while (floor(num) > 1) {//print tabs
+        num = floor(num)/2;
+        cout << "\t";
+    }
+    cout << heap[spot] << endl;
+    printtree(heap, spot*2+2, size);
 }
-//17 15 13 9 6 5 10 4 8 3 1 
-/*
-        10
-
-    13
-
-        5
-
-17
-
-
-
-            1
-        6
-            3
-    15
-            8
-        9
-            4
-17
-        10
-
-    13
-
-        5
-
-*/
